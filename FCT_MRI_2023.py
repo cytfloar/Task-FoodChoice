@@ -1,6 +1,6 @@
+### Food Choice Task Matlab Version(2016) by Dr. Karin Foerde and Dr. Joanna Steinglass
 ### Food Choice Python version is created on Nov.18, 2022
 ### by Serena J. Gu (RA at Columbia Center for Eating Disorders)
-### Based on Food Choice Task Matlab Version(2016) by Dr. Karin Foerde and Dr. Joanna Steinglass
 from fct_library import *
 
 def run():
@@ -18,12 +18,11 @@ def run():
     #########################Experiment Imformation########################
     psychopy.useVersion('2022.2.4')
     expName = 'FCT_2022'  # from the Builder filename that created this script
-    expInfo = {'participant': '', 'TR': 1.000, 'volumes': 400, 'sync': 't'
+    expInfo = {'participant': '', 'TR': 1.000, 'volumes': 400, 'sync': ['t', '5']
         , 'order': ['Condition_1_HT', 'Condition_1_TH', 'Condition_2_HT', 'Condition_2_TH']
-        , 'h_list': ['Test', 'Test1', 'Test2', 'foodlist1','foodlist2','foodlist3','foodlist4','foodlist5', 'foodlist6']
-        , 't_list': ['Test', 'Test1', 'Test2', 'foodlist1','foodlist2','foodlist3','foodlist4','foodlist5', 'foodlist6']
-        , 'c_list': ['Test', 'Test1', 'Test2', 'foodlist1','foodlist2','foodlist3','foodlist4','foodlist5', 'foodlist6']}
-    MR_settings = {'TR': expInfo['TR'], 'volumes': expInfo['volumes'], 'sync':expInfo['sync'], 'skip':0}
+        , 'h_list': ['Test0', 'nplist1','nplist2','nplist3','nplist4','nplist5','nplist6','tmslist1','tmslist2','tmslist3','tmslist4','tmslist5','tmslist6']
+        , 't_list': ['Test0', 'nplist1','nplist2','nplist3','nplist4','nplist5','nplist6','tmslist1','tmslist2','tmslist3','tmslist4','tmslist5','tmslist6']
+        , 'c_list': ['Test0', 'nplist1','nplist2','nplist3','nplist4','nplist5','nplist6','tmslist1','tmslist2','tmslist3','tmslist4','tmslist5','tmslist6']}
     dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
     if dlg.OK == False:
         core.quit()  # user pressed cancel
@@ -44,6 +43,7 @@ def run():
     logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
     #########################Experiment Start########################
+    MR_settings = {'TR': expInfo['TR'], 'volumes': expInfo['volumes'], 'sync': expInfo['sync'], 'skip':0}
     win = visual.Window([1440,900],fullscr=True, winType='pyglet',
         monitor="testMonitor", units="height", color="#000000", colorSpace='hex',
         blendMode="avg")
@@ -72,10 +72,14 @@ def run():
         newInstruction(win, "inst2", row, keyList=['1', 'space'])
         newInstruction(win, "inst3", row, keyList=['1', 'space'])
         foodList = hList if row['label'][0] == 'h' else tList
+        
         duration = expInfo['volumes'] * expInfo['TR']
         globalClock = core.Clock()
         vol = launchScan(win, MR_settings, globalClock=globalClock, wait_msg='loading...')
-        event.waitKeys(keyList =['t'])
+        event.waitKeys(keyList =[expInfo['sync']])
+        print(expInfo['sync'])
+        print([expInfo['sync']])
+
         start_time = core.getTime()
         for index, food in foodList.iterrows():
             food_name = food['food']
@@ -150,7 +154,7 @@ def run():
     duration = expInfo['volumes'] * expInfo['TR']
     globalClock = core.Clock()
     vol = launchScan(win, MR_settings, globalClock=globalClock, wait_msg='loading...')
-    event.waitKeys(keyList =['t'])
+    event.waitKeys(keyList =[expInfo['sync']])
     start_time = core.getTime()
 
     for _, food in cList.iterrows():
