@@ -7,7 +7,6 @@ def run():
     import os
     import re
     from psychopy import visual, core, data, logging, gui
-    from psychopy.hardware.emulator import launchScan
     import numpy as np
     import pandas as pd
     import psychopy
@@ -233,7 +232,7 @@ def run():
     choice.columns = ["t", "fat", "trialonset", "rt", "resp", "available", "food"]
     choice["t"] = choice["t"] + 1
     dummy = choice[choice["food"] == "yellow rice_beans"].index[0]
-    choice.at[dummy, "t"] = choice[choice["resp"].isna()]["t"]
+    choice.at[dummy, "t"] = choice[choice["resp"].isna()]["t"].iloc[0]
     choice.dropna(subset=["resp"], inplace=True)
     choice = choice.sort_values("t")
     choice.fillna('')

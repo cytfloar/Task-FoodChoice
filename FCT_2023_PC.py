@@ -31,12 +31,12 @@ def run():
 
     #########################Saving Data File Info########################
 
-    save_filename = f"{_thisDir}\data\{expInfo['participant']}_{expInfo['date']}_behav"
-    save_foodtask = f"{_thisDir}\data\{expInfo['participant']}_{expInfo['date']}_foodtask"
-    save_output = f"{_thisDir}\data\{expInfo['participant']}_{expInfo['date']}_choiceoutput"
-    save_health = f"{_thisDir}\data\{expInfo['participant']}_{expInfo['date']}_health"
-    save_taste = f"{_thisDir}\data\{expInfo['participant']}_{expInfo['date']}_taste"
-    save_choice = f"{_thisDir}\data\{expInfo['participant']}_{expInfo['date']}_choice"
+    save_filename = f"{_thisDir}\\data\\{expInfo['participant']}_{expInfo['date']}_behav"
+    save_foodtask = f"{_thisDir}\\data\\{expInfo['participant']}_{expInfo['date']}_foodtask"
+    save_output = f"{_thisDir}\\data\\{expInfo['participant']}_{expInfo['date']}_choiceoutput"
+    save_health = f"{_thisDir}\\data\\{expInfo['participant']}_{expInfo['date']}_health"
+    save_taste = f"{_thisDir}\\data\\{expInfo['participant']}_{expInfo['date']}_taste"
+    save_choice = f"{_thisDir}\\data\\{expInfo['participant']}_{expInfo['date']}_choice"
 
     logFile = logging.LogFile(save_filename+'.log', level=logging.DEBUG)
     logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
@@ -52,10 +52,10 @@ def run():
     win.flip()
     newKey()
 
-    order = f"{_thisDir}\order\{expInfo['order']}.xlsx"
-    h_list = f"{_thisDir}\lists\{expInfo['h_list']}.csv"
-    t_list = f"{_thisDir}\lists\{expInfo['t_list']}.csv"
-    c_list = f"{_thisDir}\lists\{expInfo['c_list']}.csv"
+    order = f"{_thisDir}\\order\\{expInfo['order']}.xlsx"
+    h_list = f"{_thisDir}\\lists\\{expInfo['h_list']}.csv"
+    t_list = f"{_thisDir}\\lists\\{expInfo['t_list']}.csv"
+    c_list = f"{_thisDir}\\lists\\{expInfo['c_list']}.csv"
     hList = pd.read_csv(h_list)
     tList = pd.read_csv(t_list)
     cList = pd.read_csv(c_list)
@@ -232,7 +232,7 @@ def run():
     choice.columns = ["t", "fat", "trialonset", "rt", "resp", "available", "food"]
     choice["t"] = choice["t"] + 1
     dummy = choice[choice["food"] == "yellow rice_beans"].index[0]
-    choice.at[dummy, "t"] = choice[choice["resp"].isna()]["t"]
+    choice.at[dummy, "t"] = choice[choice["resp"].isna()]["t"].iloc[0]
     choice.dropna(subset=["resp"], inplace=True)
     choice = choice.sort_values("t")
     choice.fillna('')
