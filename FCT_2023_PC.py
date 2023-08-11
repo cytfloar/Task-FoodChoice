@@ -106,7 +106,7 @@ def run():
     ref = next((x for x in results if x), ref_backup)
 
     def get_food_name(food):
-        return ' '.join(re.findall(r'/([\w .\& .\%]+).jpg', food))
+        return ' '.join(re.findall(r'\\([\w .\& .\%]+).jpg', food))
 
     ref = ref[0]
     #print(food_dict)
