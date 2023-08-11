@@ -12,7 +12,7 @@ indicate “Neutral”. Press ‘space’ to continue."""
 
 
 C_INST2 = """Please be sure your choices accurately reflect your 
-preferences, as you will be asked to eat a snack sized 
+preferences, as you will be asked to imagine a snack sized 
 portion of one of your preferred items, 
 randomly selected at the end of the task.
 
