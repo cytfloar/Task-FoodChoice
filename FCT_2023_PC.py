@@ -65,6 +65,8 @@ def run():
     food_dict = {}
 
     #########################Getting Health and Taste Ratings########################
+    flippedFlag = df.loc[0, "label"][0] == "t"
+    
     for i, row in df.iterrows():
         newInstruction(win, "inst1", row, keyList=['1', 'space'])
         newInstruction(win, "inst2", row, keyList=['1', 'space'])
@@ -106,7 +108,7 @@ def run():
     ref = next((x for x in results if x), ref_backup)
 
     def get_food_name(food):
-        return ' '.join(re.findall(r'/([\w .\& .\%]+).jpg', food))
+        return ' '.join(re.findall(r'\\([\w .\& .\%]+).jpg', food))
 
     ref = ref[0]
     #print(food_dict)
@@ -193,7 +195,7 @@ def run():
       ht = food_dict[food] if food in food_dict else [(None, None, None, None), (None, None, None, None)]
       c = choice_dict[food] if food in choice_dict else (None, None, None, None)
       htc = [*ht]
-      htc = htc[0] + htc[1]
+      htc = htc[1] + htc[0] if flippedFlag else htc[0] + htc[1]
       subjinfo = (expInfo['participant'], expInfo['date'][0:9], ref_food, condition)
       extras = (lookup_fat[food]['available'], lookup_fat[food]['fat'], lookup_fat[food]['hilo']) if food in lookup_fat else ()
       data[get_food_name(food)] = subjinfo + htc + c[:-1] + extras 
