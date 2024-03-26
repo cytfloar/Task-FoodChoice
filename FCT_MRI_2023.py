@@ -77,7 +77,8 @@ def run():
         duration = expInfo['volumes'] * expInfo['TR']
         globalClock = core.Clock()
         vol = launchScan(win, MR_settings, globalClock=globalClock, wait_msg='loading...')
-        event.waitKeys(keyList =['t'])
+        # event.waitKeys(keyList =['t'])
+        get_ready = newTextWait(win, "ready", constants.GETREADY)
         start_time = core.getTime()
         for index, food in foodList.iterrows():
             food_name = food['food']
@@ -152,7 +153,8 @@ def run():
     duration = expInfo['volumes'] * expInfo['TR']
     globalClock = core.Clock()
     vol = launchScan(win, MR_settings, globalClock=globalClock, wait_msg='loading...')
-    event.waitKeys(keyList =['t'])
+    # event.waitKeys(keyList =['t'])
+    get_ready = newTextWait(win, "ready", constants.GETREADY)
     start_time = core.getTime()
 
     for _, food in cList.iterrows():
