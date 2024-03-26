@@ -20,9 +20,8 @@ def run():
     expName = 'FCT_2022'  # from the Builder filename that created this script
     expInfo = {'participant': '', 'TR': 1.000, 'volumes': 400, 'sync': 't'
         , 'order': ['Condition_1_HT', 'Condition_1_TH', 'Condition_2_HT', 'Condition_2_TH']
-        , 'h_list': ['Test', 'Test1', 'Test2', 'foodlist1','foodlist2','foodlist3','foodlist4','foodlist5', 'foodlist6']
-        , 't_list': ['Test', 'Test1', 'Test2', 'foodlist1','foodlist2','foodlist3','foodlist4','foodlist5', 'foodlist6']
-        , 'c_list': ['Test', 'Test1', 'Test2', 'foodlist1','foodlist2','foodlist3','foodlist4','foodlist5', 'foodlist6']}
+        , 'h_list': constants.STIMLIST, 't_list': constants.STIMLIST, 'c_list': constants.STIMLIST
+        , 'reference food': constants.REF_FOODLIST}
     MR_settings = {'TR': expInfo['TR'], 'volumes': expInfo['volumes'], 'sync':expInfo['sync'], 'skip':0}
     dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
     if dlg.OK == False:

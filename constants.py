@@ -34,3 +34,16 @@ RASPBERRY= "stimuli/AA026337.png"
 ENDOFBLOCK = """End of Block
 
     Press ‘space’ to continue."""
+
+STIMLIST = ['Test', 'Test1', 'Test2', 'foodlist1','foodlist2','foodlist3','foodlist4','foodlist5', 'foodlist6']
+REF_FOODLIST = ['', '1%milk', 'air popcorn', 'American cheese', 'apple slices', 'avacado', 'baby cheese',
+'bagel and cc', 'bagel plain', 'baguette oil', 'baked potato', 'banana', 'broccoli cauliflower', 'brownie', 
+'burger', 'celery and carrot sticks', 'cheerios', 'Cheese nachos', 'cherries', 'cherry tomato', 'chicken nuggets2', 
+'cookies', 'corn cob', 'cucumber slices', 'cupcakes am', 'doughnuts', 'eggs', 'french fries', 'fried eggs', 
+'froot loops w milk', 'granola w milk', 'Grapes', 'green beans', 'grilled cheese', 'grilled chicken strips', 
+'Hershey Kisses', 'hotdog w must', 'ice cream sundae 002', 'kiwi', 'lollipops', 'm_and_m', 'mac & cheese', 
+'mashed potato', 'mini muffins', 'mozarella sticks', 'mushrooms', 'orange slices', 'PB', 'peaches', 'pickles', 
+'pizza', 'Pretzels', 'raisin bran w milk', 'raisins', 'reeses', 'rice cakes', 'rigatoni and sauce', 'rigatoni', 
+'ritz', 'salad w chicken', 'saltines', 'seaweed', 'Skim milk', 'soup with spoon', 'sour patch', 'soy chips', 
+'steak', 'strawberries', 'string cheese', 'sushi w_condiments', 'tacos', 'trail mix', 'Tribe humus pita', 
+'turkey sandwich', 'Whole milk', 'yellow popcorn', 'yellow rice_beans', 'yogurt no spoon', 'yogurt pretzels']
