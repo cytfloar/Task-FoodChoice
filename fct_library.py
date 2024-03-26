@@ -59,6 +59,13 @@ def newCross(win, wait_time=0.3):
     win.flip()
     #wait_time = uniform(0.3, 0.5)
     core.wait(wait_time)
+def newTextWait(win, name, text, wait_time=8.0, height=0.035, pos=(0, 0)):
+    textwait = visual.TextStim(win=win, name=name,
+        text=text, font='Arial', pos=pos, height=height, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, languageStyle='LTR', depth=0.0)
+    textwait.draw()
+    win.flip()
+    core.wait(wait_time)
 def showImage(win, img_path, wait_time, rating, keyList=['1','2','3','4','5'], pos=(0, 0.2), ref_image=None, ref_image_pos=(-0.35, 0.2),zoom=0.7):
     image = newImage(win, image=img_path, zoom=zoom, pos=pos)
     rating = newText(win, "rating", rating, pos=(0, -0.2))
