@@ -48,6 +48,11 @@ def newInstruction(win, name, row, keyList=None):
     inst1.draw()
     win.flip()
     newKey(keyList=keyList)
+def newInstruct(win, text, keyList=None, pos=(0,0)):
+    inst = newText(win, text, pos=pos)
+    inst.draw()
+    win.flip()
+    newKey(keyList=keyList)
 def newCross(win, wait_time=0.3):
     cross = visual.ShapeStim(
         win=win, name='fixationcross', vertices='cross',

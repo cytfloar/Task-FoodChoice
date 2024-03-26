@@ -48,11 +48,7 @@ def run():
         blendMode="avg")
     win.mouseVisible = False
     
-    welcome_text = newText(win, "welcome_text", "Welcome!")
-    welcome_text.draw()
-    win.flip()
-    newKey()
-
+    newInstruct(win, "Welcome!", keyList=['space'])
     order = f"{_thisDir}/order/{expInfo['order']}.xlsx"
     h_list = f"{_thisDir}/lists/{expInfo['h_list']}.csv"
     t_list = f"{_thisDir}/lists/{expInfo['t_list']}.csv"
@@ -132,6 +128,7 @@ def run():
     ref_text.draw()
     win.flip()
     newKey(keyList=['space'])
+    
 
     row = { 'inst1': constants.C_INST1, 'inst2': constants.C_INST2 }
     #newInstruction(win, "inst1", row, keyList=['space'])
