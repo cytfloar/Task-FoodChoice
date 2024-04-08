@@ -6,6 +6,7 @@ def newText(win, name, text, height=0.035, pos=(0, 0)):
     return visual.TextStim(win=win, name=name,
         text=text, font='Arial', pos=pos, height=height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, languageStyle='LTR', depth=0.0)
+
 def newKey(keyList=None, maxWait=float('inf')):
     #print(f"newKey(keyList={keyList},maxWait={maxWait})")
     key = None
@@ -49,7 +50,7 @@ def newInstruction(win, name, row, keyList=None):
     win.flip()
     newKey(keyList=keyList)
 def newInstruct(win, text, keyList=None, pos=(0,0)):
-    inst = newText(win, text, pos=pos)
+    inst = newText(win, "asdf", text, pos=pos)
     inst.draw()
     win.flip()
     newKey(keyList=keyList)

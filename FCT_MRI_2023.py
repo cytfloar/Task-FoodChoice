@@ -12,6 +12,7 @@ def run():
     import pandas as pd
     import constants
     import psychopy
+    import pickle
     _thisDir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(_thisDir)
 
@@ -21,13 +22,20 @@ def run():
     expInfo = {'participant': '', 'TR': 1.000, 'volumes': 400, 'sync': 't'
         , 'order': ['Condition_1_HT', 'Condition_1_TH', 'Condition_2_HT', 'Condition_2_TH']
         , 'h_list': constants.STIMLIST, 't_list': constants.STIMLIST, 'c_list': constants.STIMLIST
-        , 'reference food': constants.REF_FOODLIST}
+        , 'reference food': constants.REF_FOODLIST, 'resume from csv': ''}
     MR_settings = {'TR': expInfo['TR'], 'volumes': expInfo['volumes'], 'sync':expInfo['sync'], 'skip':0}
     dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
     if dlg.OK == False:
         core.quit()  # user pressed cancel
-    expInfo['date'] = data.getDateStr()  # add a simple timestamp
-    expInfo['expName'] = expName
+    pickleFile = expInfo['resume from csv']
+    pickleData = ""
+    if pickleFile:
+        with open(pickleFile, "rb") as f:
+            pickleData = pickle.load(f)
+            expInfo = pickleData
+    else:
+        expInfo['date'] = data.getDateStr()  # add a simple timestamp
+        expInfo['expName'] = expName
     #print(f"#################################{expInfo}") 
 
     #########################Saving Data File Info########################
@@ -42,8 +50,12 @@ def run():
     logFile = logging.LogFile(save_filename+'.log', level=logging.DEBUG)
     logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
+    pickleFile = f"{save_filename}.pickle"
+    with open(pickleFile, "wb") as f:
+        pickle.dump(expInfo, f)
+
     #########################Experiment Start########################
-    win = visual.Window([1440,900],fullscr=True, winType='pyglet',
+    win = visual.Window([1440,900],fullscr=False, winType='pyglet',
         monitor="testMonitor", units="height", color="#000000", colorSpace='hex',
         blendMode="avg")
     win.mouseVisible = False
@@ -63,8 +75,11 @@ def run():
 
     #########################Getting Health and Taste Ratings########################
     flippedFlag = df.loc[0, "label"][0] == "t"
+
+    type_dict = []
     
     for i, row in df.iterrows():
+        type_dict.append(row["label"])
         newInstruction(win, "inst1", row, keyList=['1', 'space'])
         newInstruction(win, "inst2", row, keyList=['1', 'space'])
         newInstruction(win, "inst3", row, keyList=['1', 'space'])
@@ -198,6 +213,15 @@ def run():
         food_name = food['food']
         lookup_fat[food_name] = food
 
+    def load_csv(csv):
+        # given a csv file (may have some Nones), fill in food_dict
+        df = pd.read_csv(csv)
+        
+
+    def save_csv(food_dict, csv):
+        # given food_dict, save to csv file
+        pass
+
     htcfood = list(set(list(food_dict.keys())+list(choice_dict.keys())))
     for food in htcfood:
       ht = food_dict[food] if food in food_dict else [(None, None, None, None), (None, None, None, None)]
@@ -208,8 +232,8 @@ def run():
       extras = (lookup_fat[food]['available'], lookup_fat[food]['fat'], lookup_fat[food]['hilo']) if food in lookup_fat else ()
       data[get_food_name(food)] = subjinfo + htc + c[:-1] + extras 
 
-    columns = ['SubID', 'date', 'ref_food', 'condition', 'recorded_health_rating', 'h_rt', 
-            'health_rating', 'himage_onset', 'recorded_taste_rating', 't_rt', 
+    columns = ['SubID', 'date', 'ref_food', 'condition', 'health_recorded_response', 'h_rt', 
+            'health_rating', 'himage_onset', 'taste_recorded_response', 't_rt', 
             'taste_rating', 'timage_onset', 'choice_rating', 'c_rt', 
             'cimage_onset', 'available', 'fat', 'hilo']
     df = pd.DataFrame.from_dict(data, orient='index', columns =columns)

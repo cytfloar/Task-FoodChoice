@@ -26,7 +26,7 @@ C_THANKYOU = """End of Block!
 Thank you for your participation :)"""
 
 REF_BACKUP = ["stimuli/saltines.jpg"]
-GET_READY = """Get Ready!"""
+GETREADY = """Get Ready!"""
 DUMMYFOOD = "stimuli/yellow rice_beans.jpg"
 BLUEBERRY = "stimuli/AA026339.png"
 RASPBERRY= "stimuli/AA026337.png"
